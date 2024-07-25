@@ -1,0 +1,4 @@
+[gd_resource type="AudioEffectPanner" format=3 uid="uid://dwkak7iy2fijm"]
+
+[resource]
+resource_name = "Panner"

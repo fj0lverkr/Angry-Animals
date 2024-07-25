@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://mmk06xhwcyu2"]
+
+[ext_resource type="Script" path="res://scenes/parrot/parrot.gd" id="1_hi848"]
+[ext_resource type="Texture2D" uid="uid://8vrvssrx0xpx" path="res://assets/player/parrot.png" id="1_syleq"]
+[ext_resource type="Texture2D" uid="uid://klvtim51hq6v" path="res://assets/items/arrow.png" id="3_j65mx"]
+[ext_resource type="AudioStream" uid="uid://bq7fsyfms14kh" path="res://assets/audio/stretch2.ogg" id="4_3n8ns"]
+[ext_resource type="AudioStream" uid="uid://dgonsdlbetgsx" path="res://assets/audio/catapult.ogg" id="5_xwbq8"]
+[ext_resource type="AudioStream" uid="uid://cm4noh06j82by" path="res://assets/audio/kick_wood.ogg" id="6_ilewm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j5x4d"]
+bounce = 0.2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i36pb"]
+radius = 19.0
+
+[node name="Parrot" type="RigidBody2D"]
+collision_mask = 2
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_j5x4d")
+freeze = true
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_hi848")
+
+[node name="ParrotSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_syleq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i36pb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(3, 3)
+
+[node name="Arrow" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_j65mx")
+offset = Vector2(150, 0)
+
+[node name="StretchAudio2D" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.3, 0.3)
+stream = ExtResource("4_3n8ns")
+
+[node name="LaunchAudio2D" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.3, 0.3)
+stream = ExtResource("5_xwbq8")
+
+[node name="KickWood2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ilewm")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

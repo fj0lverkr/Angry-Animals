@@ -1,0 +1,119 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx3bkqixe37es"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_sb0lp"]
+[ext_resource type="Texture2D" uid="uid://dayxjrf1gcybv" path="res://assets/env/MainBG.png" id="1_xlbhf"]
+[ext_resource type="PackedScene" uid="uid://8qb1r3qf6flv" path="res://scenes/main/level_button.tscn" id="2_64cko"]
+[ext_resource type="FontFile" uid="uid://b13uhu1kqrrue" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="3_e1uj5"]
+[ext_resource type="AudioStream" uid="uid://dnxkkkrx50wu0" path="res://assets/audio/jazzyfrenchy.mp3" id="4_q8amh"]
+[ext_resource type="AudioStream" uid="uid://cweudq2t3snfq" path="res://assets/audio/birdsong.wav" id="5_xi3dc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bg6vl"]
+font = ExtResource("3_e1uj5")
+font_size = 96
+font_color = Color(0.436099, 0.251105, 0.999995, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.376471)
+
+[sub_resource type="Animation" id="Animation_qre6n"]
+resource_name = "pulsate"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mfeks"]
+_data = {
+"pulsate": SubResource("Animation_qre6n")
+}
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sb0lp")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xlbhf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="LevelButton" parent="HBoxContainer" instance=ExtResource("2_64cko")]
+layout_mode = 2
+
+[node name="LevelButton2" parent="HBoxContainer" instance=ExtResource("2_64cko")]
+layout_mode = 2
+level_option = 2
+
+[node name="LevelButton3" parent="HBoxContainer" instance=ExtResource("2_64cko")]
+layout_mode = 2
+level_option = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -353.5
+offset_right = 353.5
+offset_bottom = 117.0
+grow_horizontal = 2
+rotation = 0.0523599
+theme_override_constants/margin_top = 20
+
+[node name="Title" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "ANGRY ANIMALS"
+label_settings = SubResource("LabelSettings_bg6vl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer"]
+libraries = {
+"": SubResource("AnimationLibrary_mfeks")
+}
+autoplay = "pulsate"
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_q8amh")
+volume_db = -20.0
+autoplay = true
+
+[node name="Birds2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_xi3dc")
+autoplay = true
+panning_strength = 1.51
+bus = &"BirdSounds"
+
+[connection signal="pressed" from="HBoxContainer/LevelButton" to="." method="_on_level_button_pressed"]
