@@ -18,4 +18,5 @@ func _on_mouse_exited() -> void:
 	scale = Vector2(1, 1)
 
 func _on_pressed() -> void:
+	ScoreManager.set_selected_level(level_option)
 	get_tree().change_scene_to_packed(selected_level)

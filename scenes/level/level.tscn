@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d16cf1jcit5kq"]
+[gd_scene load_steps=6 format=3 uid="uid://d16cf1jcit5kq"]
 
 [ext_resource type="Texture2D" uid="uid://cp6bujn2b7soi" path="res://assets/scene/colored_castle.png" id="1_1arn2"]
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_n3veo"]
 [ext_resource type="PackedScene" uid="uid://druuxwbn3ka4y" path="res://scenes/level/water.tscn" id="2_f2g82"]
 [ext_resource type="AudioStream" uid="uid://dnxkkkrx50wu0" path="res://assets/audio/jazzyfrenchy.mp3" id="4_d83k5"]
+[ext_resource type="PackedScene" uid="uid://ddpwy158q0rd5" path="res://scenes/level/scorer.tscn" id="5_qn3pp"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_n3veo")
@@ -26,3 +27,5 @@ position = Vector2(8, 655)
 stream = ExtResource("4_d83k5")
 volume_db = -20.0
 autoplay = true
+
+[node name="Scorer" parent="." instance=ExtResource("5_qn3pp")]

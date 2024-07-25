@@ -57,7 +57,7 @@ _data = {
 "vanish": SubResource("Animation_26n4j")
 }
 
-[node name="Cup" type="StaticBody2D"]
+[node name="Cup" type="StaticBody2D" groups=["cups"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_7isl1")

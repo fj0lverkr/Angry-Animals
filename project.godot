@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SignalBus="*res://autoloads/signal_bus.gd"
 SceneManager="*res://autoloads/scene_manager.gd"
+ScoreManager="*res://autoloads/score_manager.gd"
 
 [debug]
 
