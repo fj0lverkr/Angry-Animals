@@ -19,6 +19,7 @@ var _drag_vector: Vector2 = Vector2.ZERO
 var _prev_drag_vector: Vector2 = Vector2.ZERO
 var _arrow_scale_x: float = 0.0
 var _last_contact_count: int = 0
+var _has_exited_screen: bool = false
 
 func _ready() -> void:
 	arrow.hide()
@@ -91,6 +92,9 @@ func play_collision() -> void:
 	_last_contact_count = get_contact_count()
 
 func update_flight() -> void:
+	if _has_exited_screen:
+		if position.x > get_viewport_rect().size.x:
+			die()
 	play_collision()
 
 func update() -> void:
@@ -107,6 +111,9 @@ func die() -> void:
 	queue_free()
 
 func _on_screen_exited() -> void:
+	if position.y < 0 and position.x > 0 and position.x < get_viewport_rect().size.x:
+		_has_exited_screen = true
+		return
 	die()
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -120,3 +127,6 @@ func _on_sleeping_state_changed() -> void:
 			if collided_bodies[0].has_method("die"):
 				collided_bodies[0].die()
 		die()
+
+func _on_screen_entered() -> void:
+	_has_exited_screen = false

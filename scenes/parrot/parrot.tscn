@@ -50,4 +50,5 @@ stream = ExtResource("6_ilewm")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
