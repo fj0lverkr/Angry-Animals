@@ -9,6 +9,7 @@ var selected_level: PackedScene
 
 func _ready() -> void:
 	level_label.text = str(level_option)
+	score_label.text = str(ScoreManager.get_level_score(str(level_option)))
 	selected_level = load("res://scenes/level/level%s.tscn" % level_option)
 
 func _on_mouse_entered() -> void:
@@ -18,5 +19,5 @@ func _on_mouse_exited() -> void:
 	scale = Vector2(1, 1)
 
 func _on_pressed() -> void:
-	ScoreManager.set_selected_level(level_option)
+	SceneManager.set_selected_level(level_option)
 	get_tree().change_scene_to_packed(selected_level)

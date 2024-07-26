@@ -1,13 +1,18 @@
 extends Node
 
-var _selected_level: int = 1
+const DEFAULT_SCORE: int = 1000
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var _level_scores: Dictionary = {}
 
-func get_selected_level() -> int:
-	return _selected_level
+func _check_and_add_level(level: String) -> void:
+	if !_level_scores.has(level):
+		_level_scores[level] = DEFAULT_SCORE
 
-func set_selected_level(level_id: int) -> void:
-	_selected_level = level_id
+func set_score_for_level(score: int, level: String) -> void:
+	_check_and_add_level(level)
+	if score < _level_scores[level]:
+		_level_scores[level] = score
+
+func get_level_score(level: String) -> int:
+	_check_and_add_level(level)
+	return _level_scores[level]
