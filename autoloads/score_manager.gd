@@ -1,6 +1,7 @@
 extends Node
 
 const DEFAULT_SCORE: int = 1000
+const SCORE_FILE: String = "user://animals.dat"
 
 var _level_scores: Dictionary = {}
 
