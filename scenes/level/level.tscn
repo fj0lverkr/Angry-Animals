@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d16cf1jcit5kq"]
+[gd_scene load_steps=6 format=3 uid="uid://d16cf1jcit5kq"]
 
 [ext_resource type="Texture2D" uid="uid://cp6bujn2b7soi" path="res://assets/scene/colored_castle.png" id="1_1arn2"]
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_n3veo"]
 [ext_resource type="PackedScene" uid="uid://druuxwbn3ka4y" path="res://scenes/level/water.tscn" id="2_f2g82"]
-[ext_resource type="AudioStream" uid="uid://dnxkkkrx50wu0" path="res://assets/audio/jazzyfrenchy.mp3" id="4_d83k5"]
+[ext_resource type="PackedScene" uid="uid://drvfxsbt0p5xq" path="res://scenes/game_ui/game_ui.tscn" id="2_nbmd3"]
 [ext_resource type="PackedScene" uid="uid://ddpwy158q0rd5" path="res://scenes/level/scorer.tscn" id="5_qn3pp"]
-[ext_resource type="LabelSettings" uid="uid://dq2axhu7je8q4" path="res://scenes/main/lg_48.tres" id="6_uwd2t"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_n3veo")
@@ -17,34 +16,17 @@ texture = ExtResource("1_1arn2")
 centered = false
 
 [node name="AnimalSpawn" type="Marker2D" parent="."]
-position = Vector2(162, 224)
+position = Vector2(129, 322)
 scale = Vector2(1.2, 1.2)
 
 [node name="Water" parent="." instance=ExtResource("2_f2g82")]
 z_index = 1
 position = Vector2(8, 655)
 
-[node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_d83k5")
-volume_db = -20.0
-autoplay = true
-
 [node name="Scorer" parent="." instance=ExtResource("5_qn3pp")]
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-
-[node name="AttemptsLabel" type="Label" parent="Control/MarginContainer"]
-layout_mode = 2
-text = "o"
-label_settings = ExtResource("6_uwd2t")
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("2_nbmd3")]
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
