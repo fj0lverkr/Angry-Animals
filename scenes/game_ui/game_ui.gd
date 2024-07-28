@@ -14,7 +14,8 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	bgm.seek(SceneManager.bgm_position)
 	level_completed = false
-	level_label.text = "Level: %s" % SceneManager.get_selected_level()
+	level_label.text = "Level %s" % SceneManager.get_selected_level()
+	attempts_label.text = "Attempts: %s" % attempts
 	SignalBus.on_level_completed.connect(_on_level_completed)
 	SignalBus.on_score_updated.connect(_on_score_updated)
 

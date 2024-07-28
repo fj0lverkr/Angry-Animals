@@ -45,7 +45,7 @@ label_settings = ExtResource("1_ux30l")
 
 [node name="AttemptsLabel" type="Label" parent="MarginContainer/VBTopLeft"]
 layout_mode = 2
-text = "Attempts: 100"
+text = "Attempts: 0"
 label_settings = ExtResource("1_ux30l")
 
 [node name="VBCenter" type="VBoxContainer" parent="MarginContainer"]
